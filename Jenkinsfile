@@ -37,8 +37,10 @@ pipeline {
             }
         }
         stage ('API Test') {
-            dir ('api-test') {
-                git branch: '*/master', credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-api-test.git'
+            steps {
+                dir ('api-test') {
+                    git branch: '*/master', credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-api-test.git'
+                }
             }
         }
     }
