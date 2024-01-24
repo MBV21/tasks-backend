@@ -13,7 +13,7 @@ pipeline {
                 bat 'mvn test' // aproveitar a construção anterior e executar testes
             }
         }
-        stage ('Sonar Analisys') {
+        stage ('Sonar Analisys') { // análise do sonar necessita dos containers sonar e pg-sonar
             environment {
                 scannerHome = tool 'Sonar_Scanner'
             }
@@ -25,7 +25,7 @@ pipeline {
         }
         stage ('Quality Gate') {
             steps {
-                sleep(30)
+                sleep(30) // necessário dar algum tempo para que o quality gate seja mensurado
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
@@ -33,5 +33,3 @@ pipeline {
         }
     }
 }
-
-
