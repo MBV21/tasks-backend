@@ -39,7 +39,7 @@ pipeline {
         stage ('API Test') {
             steps {
                 dir ('api-test') {
-                    credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-api-test.git'
+                    git credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-api-test.git'
                     bat 'mvn test'
                 }
             }
