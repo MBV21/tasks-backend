@@ -5,15 +5,15 @@ pipeline {
     stages {
         stage ('Build Backend') {
             steps {
-                bat 'mvn clean package -DskipTests=true' // construir mas n„o executar testes
+                bat 'mvn clean package -DskipTests=true' // construir mas n√£o executar testes
             }
         }
         stage ('Unit Tests') {
             steps {
-                bat 'mvn test' // aproveitar a construÁ„o anterior e executar testes
+                bat 'mvn test' // aproveitar a constru√ß√£o anterior e executar testes
             }
         }
-        stage ('Sonar Analisys') { // an·lise do sonar necessita dos containers sonar e pg-sonar
+        stage ('Sonar Analisys') { // an√°lise do sonar necessita dos containers sonar e pg-sonar
             environment {
                 scannerHome = tool 'Sonar_Scanner'
             }
@@ -25,7 +25,7 @@ pipeline {
         }
         stage ('Quality Gate') {
             steps {
-                sleep(30) // necess·rio dar algum tempo para que o quality gate seja mensurado
+                sleep(30) // necess√°rio dar algum tempo para que o quality gate seja mensurado
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
@@ -59,6 +59,12 @@ pipeline {
                     git credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-functional-tests.git'
                     bat 'mvn test'
                 }
+            }
+        }
+        stage ('Deploy Prod') {
+            steps {
+                bat 'docker-compose build'
+                bat 'docker-compose up --detach'
             }
         }
     }
