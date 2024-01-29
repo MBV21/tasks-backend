@@ -63,7 +63,7 @@ pipeline {
         }
         stage ('Deploy Prod') {
             steps {
-                bat 'docker-compose build --file docker-compose-producao.yml'
+                bat 'docker-compose build'
                 bat 'docker-compose up --detach'
             }
         }
