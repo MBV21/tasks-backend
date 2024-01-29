@@ -57,7 +57,7 @@ pipeline {
             steps {
                 dir ('functional-tests') {
                     git credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-functional-tests.git'
-                    bat 'mvn test'
+                    bat 'mvn clean test'
                 }
             }
         }
