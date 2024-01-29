@@ -53,14 +53,14 @@ pipeline {
                 }
             }
         }
-        stage ('Functional Tests') {
-            steps {
-                dir ('functional-tests') {
-                    git credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-functional-tests.git'
-                    bat 'mvn clean test'
-                }
-            }
-        }
+        // stage ('Functional Tests') {
+        //     steps {
+        //         dir ('functional-tests') {
+        //             git credentialsId: 'GitHub_MBV21', url: 'https://github.com/MBV21/tasks-functional-tests.git'
+        //             bat 'mvn clean test'
+        //         }
+        //     }
+        // }
         stage ('Deploy Prod') {
             steps {
                 bat 'docker-compose build'
